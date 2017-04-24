@@ -1,0 +1,528 @@
+
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8' />
+    <meta name='author' content='Pabijan Grzegorz' />
+    <meta name='description' content='MPKSA' />
+    <meta name='keywords' content='MPKSA' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width' />
+
+    <base target='_parent'>
+
+    <link rel='icon' href='favicon.png' type='image/png' sizes='16x16' />
+    <link rel='shortcut icon' href='favicon.png' type='image/png'/>
+    <link rel='stylesheet' href='widok/GP/CSS/style.css' type='text/css' />
+
+    <title> Rozkłady jazdy MPK S.A. w Krakowie </title>
+
+</head>
+<body>
+
+
+
+
+
+<TABLE class='main'>
+    <THEAD>
+    <TR>
+        <TD>
+
+            <table class='nav' >
+                <tr>
+                    <td rowspan='3' style=' text-align: right; '>                           <!--  LOGO  -->
+                        <a href='http://mpk.krakow.pl/' target='_blank' style='text-align: left; ' >    <img src='widok/GP/zdjecie/logo_100x58.png'> </a>
+                    </td>
+                    <td style='text-align: left; '>                                         <!--  NAPIS MPK  -->
+                        <a href='http://rozklady.mpk.krakow.pl/' target='_blank' style='text-align: left; ' >  Rozkłady jazdy  MPK S.A. w Krakowie </a>
+                    </td>
+                    <td rowspan='3' style=' white-space: nowrap; '>                         <!--  MOBILE / STACJONARNE  -->
+                        <a href='http://rozklady.mpk.krakow.pl/?akcja=telefon' > <img src='widok/GP/zdjecie/telefon_50x50.png' title='MOBILE' > </a>
+                    </td>
+                    <td style='text-align: right; white-space: nowrap; '>                   <!--  LOGO  -->
+                        <a href='http://rozklady.mpk.krakow.pl/?akcja=przystanek&rozklad=20170424&lang=PL' > <img src='widok/GP/zdjecie/flag_poland.png' > <a>
+                            <a href='http://rozklady.mpk.krakow.pl/?akcja=przystanek&rozklad=20170424&lang=EN' > <img src='widok/GP/zdjecie/flag_great_britain.png' > </a>
+                            <a href='http://rozklady.mpk.krakow.pl/?akcja=przystanek&rozklad=20170424&lang=DE' > <img src='widok/GP/zdjecie/flag_germany.png' > <a>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan='2' style='text-align: center; white-space: nowrap; height: 30px; '>
+                        <a href='https://www.youtube.com/user/MPKKrakow' target='_blank'>   <img src='widok/GP/zdjecie/youtube.png' title='YOUTUBE' > </a>
+                        <a href='https://www.instagram.com/mpk_krakow/' target='_blank'>    <img src='widok/GP/zdjecie/instagram.png' title='INSTAGRAM' > </a>
+                        <a href='https://www.facebook.com/mpkkrakow/' target='_blank'>      <img src='widok/GP/zdjecie/facebook.png' title='FACEBOOK' > </a>
+                        <a href='https://twitter.com/MPK_Krakow' target='_blank'>           <img src='widok/GP/zdjecie/twitter.png' title='TWITTER' > </a>
+                    </td>
+                    <td rowspan='2'> </td>
+                </tr>
+            </table>
+
+        </TD>
+    </TR>
+    <TR>
+        <TD>
+
+            <table class='nav' >
+                <tr>
+                    <td style=' min-width: 100px; text-align: center; '>
+                        <label class='label_submit' style=' text-align: center; white-space: nowrap; ' title=' Linie ' >
+                            <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424' >
+                                <p class='borderTBLR' >
+                                    Linie                                 </p>
+                            </a>
+                        </label>
+                    </td>
+                    <td  style=' width: 100px; '>
+                        <label class='label_submit' style=' white-space: nowrap;' title=' Przystanki ' >
+                            <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&akcja=przystanek' >
+                                <p class='borderTBLR' >
+                                    Przystanki                                 </p>
+                            </a>
+                        </label>
+                    </td>
+                    <td style=' min-width: 100px; '>
+                        <label class='' style='  white-space: nowrap; ' title=' Ulice ' >
+                            <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&akcja=ulica' >
+                                <p class='borderTBLR' >
+                                    Ulice                                 </p>
+                            </a>
+                        </label>
+                    </td>
+                </tr>
+            </table>
+
+        </TD>
+    </TR>
+    <TR>
+        <TD style=' text-align: left; '>
+
+            <table style=' margin-top: 10px; width: 80%; '>
+                <tr>
+                    <td style='text-align: left; white-space: nowrap; '>
+                        Aktualny rozkład jazdy:
+                        <label class='label_submit'>
+                            <a href='http://rozklady.mpk.krakow.pl/?lang=PL&akcja=przystanek&rozklad=20170424' > 2017-04-24 </a>
+                        </label>
+                    </td>
+                </tr>
+
+                <!--<tr>
+                        <td>
+                            <div class='blok'>
+                                <p class='komunikat'> Komunikaty MPK S.A.
+                                    <a target='_blank' href='http://mpk.krakow.pl/pl/import-komunikaty/'  > LINK </a>
+                                </p>
+                            </div>
+                        </td>
+                    </tr> -->
+
+
+                <tr>
+                    <td style='text-align: left; '>
+                        <div style='text-align: left; '>  Zmiana rozkładu jazdy od dnia:
+
+                            <label class='label_submit'>
+                                <a href='http://rozklady.mpk.krakow.pl/?lang=PL&akcja=przystanek&rozklad=20170425' > 2017-04-25 </a>
+                            </label>
+
+                            <BR /><BR />
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+        </TD>
+    </TR>
+    </THEAD>
+    <TBODY>
+    <TR>
+        <TD>
+            <TABLE style=' margin-bottom: 20px; ' >
+                <THEAD>
+                <TR>
+                    <TD colspan='9' style='font-size: 24px; ' >
+                        Przystanek: AGH
+                    </TD>
+                </TR>
+                <TR>
+                    <TD style=' text-align: left; '> </TD>
+                    <TD style=' text-align: left; '>  Linia  </TD>
+                    <TD style=' text-align: left; '>  Typ linii  </TD>
+                    <TD colspan='3' >  Wariant  </TD>
+                    <TD style=' text-align: left; '>  Miejsce  </TD>
+                </TR>
+                <TR>
+                    <TD colspan='9' >
+                        <div  style=' white-space: nowrap; border-top: solid black; border-radius: 20px; padding: 10px; ' >  </div>
+                    </TD>
+                </TR>
+                </THEAD>
+                <TBODY>
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 144  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=144__2__40' >
+                            <span style=' white-space: nowrap; ' > Prądnik Biały </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Rżąka  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 164  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=164__2__38' >
+                            <span style=' white-space: nowrap; ' > Górka Narodowa </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Piaski Nowe  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 164  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=164__1__13' >
+                            <span style=' white-space: nowrap; ' > Piaski Nowe </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Górka Narodowa  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 169  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=169__2__42' >
+                            <span style=' white-space: nowrap; ' > Górka Narodowa </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Zajezdnia Wola Duchacka  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 169  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=169__3__16' >
+                            <span style=' white-space: nowrap; ' > Piaski Wielkie </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Górka Narodowa  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 169  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=169__1__16' >
+                            <span style=' white-space: nowrap; ' > Zajezdnia Wola Duchacka </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Górka Narodowa  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 173  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=173__2__37' >
+                            <span style=' white-space: nowrap; ' > Azory </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Nowy Bieżanów Południe  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 179  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=179__2__29' >
+                            <span style=' white-space: nowrap; ' > Dworzec Główny Zachód </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Os.Kurdwanów  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 179  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=179__1__19' >
+                            <span style=' white-space: nowrap; ' > Os.Kurdwanów </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Dworzec Główny Zachód  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 192  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=192__2__51' >
+                            <span style=' white-space: nowrap; ' > Chełm </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Czyżyny Dworzec  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 192  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=192__1__24' >
+                            <span style=' white-space: nowrap; ' > Czyżyny Dworzec </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Chełm  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 194  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=194__2__37' >
+                            <span style=' white-space: nowrap; ' > Krowodrza Górka </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Czerwone Maki P+R  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 469  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=469__1__14' >
+                            <span style=' white-space: nowrap; ' > Górka Narodowa </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Piaski Wielkie  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 503  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=503__2__29' >
+                            <span style=' white-space: nowrap; ' > Górka Narodowa Wschód </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Nowy Bieżanów Południe  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 503  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=503__1__12' >
+                            <span style=' white-space: nowrap; ' > Nowy Bieżanów Południe </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Górka Narodowa Wschód  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 601  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=601__2__60' >
+                            <span style=' white-space: nowrap; ' > Mydlniki </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Aleja Przyjaźni  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 608  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=608__1__22' >
+                            <span style=' white-space: nowrap; ' > Czyżyny Dworzec </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Pod Fortem  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 608  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=608__2__64' >
+                            <span style=' white-space: nowrap; ' > Pod Fortem </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Czyżyny Dworzec  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                <tr>
+                    <td style=' text-align: right ;'> </td>
+                    <td style=' text-align: right ;'> 611  </td>
+                    <td style=' text-align: left ;'> miejska  </td>
+                    <td style=' text-align: right ; white-space: nowrap;'>
+
+                        <a href='http://rozklady.mpk.krakow.pl/?lang=PL&rozklad=20170424&linia=611__2__40' >
+                            <span style=' white-space: nowrap; ' > Chełmońskiego Pętla </span>
+                        </a>
+                    </td>
+                    <td>-</td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Mistrzejowice  </td>
+                    <td style=' text-align: left ; white-space: nowrap;'>Al. Mickiewicza  </td>
+                </tr>
+
+
+
+                </TBODY>
+            </TABLE>
+        </TD>
+    </TR>
+    </TBODY>
+    <TFOOT>
+    <TR>
+        <TD>
+            <table style=' width: 99%; '>
+                <tr>
+                    <td>
+                        <div style=' padding: 4px; border-radius: 20px; border-top: solid black; color: black; '>
+                            Rozkłady jazdy  MPK S.A. w Krakowie <BR /> ( 192 aktualizacja 2017-04-20 13:22 )                                 </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style=' color: transparent; text-align: right; font-size: 8px; '>
+                        0.0988 @Pabijan Grzegorz 2016                             </td>
+                </tr>
+                <tr>
+                    <td>
+
+                        <DIV class='cookiesy' >
+                            <BR /> Ważne: Strona www.mpk.krakow.pl wykorzystuje pliki cookies.
+                            <BR /> Używamy cookies i podobnych technologii m.in. w celach reklamowych, statystycznych, świadczenia usług.
+                            <BR /> Korzystanie z witryny bez zmiany ustawień Twojej przeglądarki oznacza, że będą one umieszczane w Twoim urządzeniu końcowym.
+                            <BR /> Zawsze możesz zmienić te ustawienia.
+                            <BR /> <a href='http://www.mpk.krakow.pl/pl/polityka-cookies/' style=' color: blue; '  > Polityka COOKIES </a>
+                            <BR /><BR />
+                        </DIV>
+
+                    </td>
+                </tr>
+            </table>
+
+
+
+        </TD>
+    </TR>
+    </TFOOT>
+</TABLE>
+</FORM>
+
