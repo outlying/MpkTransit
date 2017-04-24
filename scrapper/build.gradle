@@ -16,7 +16,7 @@ junitPlatform {
     }
     // enableStandardTestTask true
     // reportsDir file('build/test-results/junit-platform') // this is the default
-    logManager 'org.apache.logging.log4j.jul.LogManager'
+    // logManager 'org.apache.logging.log4j.jul.LogManager'
 }
 
 ext.junitJupiterVersion  = '5.0.0-M4'
