@@ -1,5 +1,6 @@
-package com.antyzero.mpk.transit.scrapper
+package com.antyzero.mpk.transit.scrapper.mock
 
+import com.antyzero.mpk.transit.scrapper.TimetablesSites
 import io.reactivex.Flowable
 import java.io.File
 import java.io.IOException
@@ -9,15 +10,15 @@ import java.util.*
 
 class MockTimetablesSites : TimetablesSites {
 
-    override fun main(): Flowable<String> = Flowable.just("site_main.html")
+    override fun main(): Flowable<String> = getFileFlowable("site_main.html")
 
-    override fun line(line: Int, timetableDay: LocalDate): Flowable<String> = Flowable.just("site_line.html")
+    override fun line(line: Int, timetableDay: LocalDate): Flowable<String> = getFileFlowable("site_line.html")
 
-    override fun lines(timetableDay: LocalDate): Flowable<String> = Flowable.just("site_main.html")
+    override fun lines(timetableDay: LocalDate): Flowable<String> = getFileFlowable("site_main.html")
 
-    override fun stop(stopId: String, timetableDay: LocalDate): Flowable<String> = Flowable.just("site_stop.html")
+    override fun stop(stopId: String, timetableDay: LocalDate): Flowable<String> = getFileFlowable("site_stop.html")
 
-    override fun stops(timetableDay: LocalDate): Flowable<String> = Flowable.just(getFile("site_stops.html"))
+    override fun stops(timetableDay: LocalDate): Flowable<String> = getFileFlowable(getFile("site_stops.html"))
 
     private fun getFile(fileName: String): String {
         val result = StringBuilder("")
@@ -37,6 +38,7 @@ class MockTimetablesSites : TimetablesSites {
         }
 
         return result.toString()
-
     }
+
+    private fun getFileFlowable(fileName: String): Flowable<String> = Flowable.just(getFile(fileName))
 }

@@ -7,7 +7,9 @@ import java.time.LocalDateTime
 
 class Scrapper(private val timetablesSites: TimetablesSites) {
 
-    fun timetablesDates(): Flowable<LocalDate> {
+    fun timetableCurrent(): Flowable<LocalDate> = timetableDates().take(1)
+
+    fun timetableDates(): Flowable<LocalDate> {
         return timetablesSites.main()
                 .concatMap { Flowable.fromIterable(REGEXP_TIMETABLE_DATE.findAll(it).asIterable()) }
                 .map {
