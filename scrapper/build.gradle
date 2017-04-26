@@ -19,6 +19,35 @@ junitPlatform {
     // logManager 'org.apache.logging.log4j.jul.LogManager'
 }
 
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/kotlin')
+        }
+        resources.srcDir file('src/integration-test/resources')
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    outputs.upToDateWhen { false }
+}
+
+tasks.withType(Test) {
+    reports.html.destination = file("${reporting.baseDir}/${name}")
+}
+
+check.dependsOn integrationTest
+integrationTest.mustRunAfter test
+
 ext.junitJupiterVersion  = '5.0.0-M4'
 
 dependencies {
@@ -29,4 +58,8 @@ dependencies {
 
     testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
+
+    integrationTestCompile 'org.assertj:assertj-core:3.0.0'
+    integrationTestCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
+    integrationTestRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
 }

@@ -1,8 +1,6 @@
 package com.antyzero.mpk.transit.scrapper.site
 
-import com.antyzero.mpk.transit.scrapper.site.TimetablesSites
 import io.reactivex.Flowable
-import io.reactivex.Observable
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.time.LocalDate
@@ -24,7 +22,10 @@ class MpkTimetablesSites(
     }
 
     override fun lines(timetableDay: LocalDate): Flowable<String> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val request = Request.Builder().apply {
+            url(baseUrl)
+        }.build()
+        return execute(request)
     }
 
     override fun stop(stopId: String, timetableDay: LocalDate): Flowable<String> {

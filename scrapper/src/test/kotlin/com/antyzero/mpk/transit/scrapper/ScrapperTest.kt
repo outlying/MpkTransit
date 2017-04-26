@@ -47,13 +47,13 @@ class ScrapperTest {
 
     @Nested
     @DisplayName("Collect data from particular timetable update")
-    class TimetableTest {
+    inner class TimetableTest {
 
         private lateinit var timetable: Timetable
 
         @BeforeEach
         internal fun setUp() {
-            timetable = Timetable(MockTimetablesSites(), LocalDate.of(2017, 4, 20))
+            timetable = scrapper.timetable()
         }
 
         @Test
@@ -72,7 +72,7 @@ class ScrapperTest {
                     .assertValueCount(1408)
                     .assertNoErrors()
                     .assertComplete()
-                    .values().forEach(::println)
+                    .values()
         }
     }
 }

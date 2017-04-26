@@ -1,8 +1,5 @@
 package com.antyzero.mpk.transit.scrapper
 
-import com.antyzero.mpk.transit.scrapper.model.Line
-import com.antyzero.mpk.transit.scrapper.model.Modifications
-import com.antyzero.mpk.transit.scrapper.model.Type
 import com.antyzero.mpk.transit.scrapper.site.TimetablesSites
 import io.reactivex.Flowable
 import java.time.LocalDate
@@ -37,7 +34,7 @@ class Scrapper(private val timetablesSites: TimetablesSites) {
                 }
     }
 
-    fun timetable(localDate: LocalDate = LocalDate.now()) = Timetable(timetablesSites, localDate)
+    fun timetable(localDate: LocalDate = timetableCurrent().blockingFirst()) = Timetable(timetablesSites, localDate)
 
     companion object {
 
