@@ -43,4 +43,10 @@ class ScrapperTest {
                 .assertValues(LocalDateTime.of(2017, 4, 20, 13, 22))
                 .assertComplete()
     }
+
+    @Test
+    internal fun lines() {
+        scrapper.lines()
+                .forEach(::println)
+    }
 }

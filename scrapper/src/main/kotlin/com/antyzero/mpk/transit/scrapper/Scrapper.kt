@@ -33,11 +33,24 @@ class Scrapper(private val timetablesSites: TimetablesSites) {
                 }
     }
 
-    fun timetable(timetableDay: LocalDate) = Timetable(timetablesSites, timetableDay)
+    fun lines(): Flowable<Line> {
+        return timetablesSites.main()
+                .concatMap { Flowable.fromIterable(REGEXP_LINE_DATA.findAll(it).asIterable()) }
+                .map {
+
+                    val lineType = it.groupValues[1]
+                    val lineMods = it.groupValues[2]
+                    val lineNumber = it.groupValues[3].toInt()
+
+                    Line(lineNumber)
+                }
+    }
 
     companion object {
 
         private val REGEXP_TIMETABLE_DATE = "rozklad=(\\d{4})(\\d{2})(\\d{2})\'.+?\\d{4}-\\d{2}-\\d{2}".toRegex()
         private val REGEXP_LAST_UPDATE = "aktualizacja (\\d{4})-(\\d{2})-(\\d{2})\\s(\\d{2}):(\\d{2})".toRegex()
+        private val REGEXP_LINE_DATA = "<a.+?class='(linia\\w?)' style='\\s+border:\\s2px\\ssolid\\s(.+?);.+?>\\s+?(\\d+?)\\s+?<\\/a>".toRegex()
     }
 }
+
