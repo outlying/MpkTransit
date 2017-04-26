@@ -47,5 +47,14 @@ class DataDownload {
                         assertThat(it.valueCount()).isGreaterThan(100)
                     }
         }
+
+        @Test
+        internal fun downloadAllStops() {
+            scrapper.timetable().stops().test()
+                    .assertComplete()
+                    .assertOf {
+                        assertThat(it.valueCount()).isGreaterThan(1000)
+                    }
+        }
     }
 }
