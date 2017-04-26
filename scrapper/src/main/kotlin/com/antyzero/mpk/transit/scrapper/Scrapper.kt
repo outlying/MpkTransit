@@ -3,6 +3,7 @@ package com.antyzero.mpk.transit.scrapper
 import io.reactivex.Flowable
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.util.*
 
 
 class Scrapper(private val timetablesSites: TimetablesSites) {
@@ -37,12 +38,16 @@ class Scrapper(private val timetablesSites: TimetablesSites) {
         return timetablesSites.main()
                 .concatMap { Flowable.fromIterable(REGEXP_LINE_DATA.findAll(it).asIterable()) }
                 .map {
-
+                    val mods = mutableSetOf<Modifications>()
                     val lineType = it.groupValues[1]
-                    val lineMods = it.groupValues[2]
+                    val lowRiderMod = it.groupValues[2]
                     val lineNumber = it.groupValues[3].toInt()
 
-                    Line(lineNumber)
+                    if (lowRiderMod == "deepskyblue") {
+                        mods.add(Modifications.LOW_RIDER)
+                    }
+
+                    Line(lineNumber, Type.findByTypeName(lineType), mods)
                 }
     }
 

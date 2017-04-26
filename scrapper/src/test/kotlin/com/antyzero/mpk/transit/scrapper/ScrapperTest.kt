@@ -45,8 +45,11 @@ class ScrapperTest {
     }
 
     @Test
+    @DisplayName("Find all lines")
     internal fun lines() {
-        scrapper.lines()
-                .forEach(::println)
+        scrapper.lines().test()
+                .assertValueCount(192)
+                .assertNoErrors()
+                .assertComplete()
     }
 }
