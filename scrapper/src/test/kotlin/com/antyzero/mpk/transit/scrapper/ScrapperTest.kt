@@ -3,6 +3,7 @@ package com.antyzero.mpk.transit.scrapper
 import com.antyzero.mpk.transit.scrapper.mock.MockTimetablesSites
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -10,7 +11,7 @@ import java.time.LocalDateTime
 @DisplayName("Collecting data from website source")
 class ScrapperTest {
 
-    private lateinit var scrapper: Scrapper
+    lateinit var scrapper: Scrapper
 
     @BeforeEach
     internal fun setUp() {
@@ -44,12 +45,33 @@ class ScrapperTest {
                 .assertComplete()
     }
 
-    @Test
-    @DisplayName("Find all lines")
-    internal fun lines() {
-        scrapper.lines().test()
-                .assertValueCount(192)
-                .assertNoErrors()
-                .assertComplete()
+    @Nested
+    @DisplayName("Collect data from particular timetable update")
+    class TimetableTest {
+
+        private lateinit var timetable: Timetable
+
+        @BeforeEach
+        internal fun setUp() {
+            timetable = Timetable(MockTimetablesSites(), LocalDate.of(2017, 4, 20))
+        }
+
+        @Test
+        @DisplayName("Find all lines")
+        internal fun lines() {
+            timetable.lines().test()
+                    .assertValueCount(192)
+                    .assertNoErrors()
+                    .assertComplete()
+        }
+
+        @Test
+        @DisplayName("Find all stops")
+        internal fun stops() {
+            timetable.stops().test()
+                    .assertValueCount(1408)
+                    .assertNoErrors()
+                    .assertComplete()
+        }
     }
 }

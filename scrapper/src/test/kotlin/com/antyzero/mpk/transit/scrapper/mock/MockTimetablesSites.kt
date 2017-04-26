@@ -1,6 +1,6 @@
 package com.antyzero.mpk.transit.scrapper.mock
 
-import com.antyzero.mpk.transit.scrapper.TimetablesSites
+import com.antyzero.mpk.transit.scrapper.site.TimetablesSites
 import io.reactivex.Flowable
 import java.io.File
 import java.io.IOException
@@ -18,7 +18,7 @@ class MockTimetablesSites : TimetablesSites {
 
     override fun stop(stopId: String, timetableDay: LocalDate): Flowable<String> = getFileFlowable("site_stop.html")
 
-    override fun stops(timetableDay: LocalDate): Flowable<String> = getFileFlowable(getFile("site_stops.html"))
+    override fun stops(timetableDay: LocalDate): Flowable<String> = getFileFlowable("site_stops.html")
 
     private fun getFile(fileName: String): String {
         val result = StringBuilder("")

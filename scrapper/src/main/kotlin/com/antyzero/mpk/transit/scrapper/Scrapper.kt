@@ -1,9 +1,12 @@
 package com.antyzero.mpk.transit.scrapper
 
+import com.antyzero.mpk.transit.scrapper.model.Line
+import com.antyzero.mpk.transit.scrapper.model.Modifications
+import com.antyzero.mpk.transit.scrapper.model.Type
+import com.antyzero.mpk.transit.scrapper.site.TimetablesSites
 import io.reactivex.Flowable
 import java.time.LocalDate
 import java.time.LocalDateTime
-import java.util.*
 
 
 class Scrapper(private val timetablesSites: TimetablesSites) {
@@ -34,28 +37,12 @@ class Scrapper(private val timetablesSites: TimetablesSites) {
                 }
     }
 
-    fun lines(): Flowable<Line> {
-        return timetablesSites.main()
-                .concatMap { Flowable.fromIterable(REGEXP_LINE_DATA.findAll(it).asIterable()) }
-                .map {
-                    val mods = mutableSetOf<Modifications>()
-                    val lineType = it.groupValues[1]
-                    val lowRiderMod = it.groupValues[2]
-                    val lineNumber = it.groupValues[3].toInt()
-
-                    if (lowRiderMod == "deepskyblue") {
-                        mods.add(Modifications.LOW_RIDER)
-                    }
-
-                    Line(lineNumber, Type.findByTypeName(lineType), mods)
-                }
-    }
+    fun timetable(localDate: LocalDate = LocalDate.now()) = Timetable(timetablesSites, localDate)
 
     companion object {
 
         private val REGEXP_TIMETABLE_DATE = "rozklad=(\\d{4})(\\d{2})(\\d{2})\'.+?\\d{4}-\\d{2}-\\d{2}".toRegex()
         private val REGEXP_LAST_UPDATE = "aktualizacja (\\d{4})-(\\d{2})-(\\d{2})\\s(\\d{2}):(\\d{2})".toRegex()
-        private val REGEXP_LINE_DATA = "<a.+?class='(linia\\w?)' style='\\s+border:\\s2px\\ssolid\\s(.+?);.+?>\\s+?(\\d+?)\\s+?<\\/a>".toRegex()
     }
 }
 

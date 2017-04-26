@@ -1,5 +1,6 @@
-package com.antyzero.mpk.transit.scrapper
+package com.antyzero.mpk.transit.scrapper.site
 
+import com.antyzero.mpk.transit.scrapper.site.TimetablesSites
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import okhttp3.OkHttpClient

@@ -1,4 +1,4 @@
-package com.antyzero.mpk.transit.scrapper
+package com.antyzero.mpk.transit.scrapper.site
 
 import io.reactivex.Flowable
 import java.time.LocalDate
@@ -19,6 +19,5 @@ interface TimetablesSites {
     fun stop(stopId: String, timetableDay: LocalDate = LocalDate.now()): Flowable<String>
 
     fun stops(timetableDay: LocalDate = LocalDate.now()): Flowable<String>
-
 
 }

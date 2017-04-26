@@ -1,4 +1,4 @@
-package com.antyzero.mpk.transit.scrapper
+package com.antyzero.mpk.transit.scrapper.model
 
 data class Line(
         val lineNumber: Int,
