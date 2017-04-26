@@ -72,6 +72,7 @@ class ScrapperTest {
                     .assertValueCount(1408)
                     .assertNoErrors()
                     .assertComplete()
+                    .values().forEach(::println)
         }
     }
 }

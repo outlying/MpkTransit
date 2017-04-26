@@ -31,7 +31,9 @@ class Timetable(private val timetablesSites: TimetablesSites, private val timeta
         return timetablesSites.stops(timetableDay)
                 .concatMap { Flowable.fromIterable(REGEXP_STOP.findAll(it).asIterable()) }
                 .map {
-                    Stop()
+                    val stopId = it.groupValues[1]
+                    val stopName = it.groupValues[2].trim()
+                    Stop(stopId, stopName)
                 }
     }
 

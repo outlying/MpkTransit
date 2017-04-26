@@ -1,5 +1,6 @@
 package com.antyzero.mpk.transit.scrapper.model
 
 
-class Stop {
-}
+data class Stop(
+        val id: String,
+        val name: String)
