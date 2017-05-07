@@ -10,7 +10,7 @@ interface TimetablesSites {
 
     // Lines
 
-    fun line(line: Int, timetableDay: LocalDate = LocalDate.now()): Flowable<String>
+    fun line(line: Int, direction: Direction = Direction.A, timetableDay: LocalDate = LocalDate.now()): Flowable<String>
 
     fun lines(timetableDay: LocalDate = LocalDate.now()): Flowable<String>
 
@@ -20,4 +20,8 @@ interface TimetablesSites {
 
     fun stops(timetableDay: LocalDate = LocalDate.now()): Flowable<String>
 
+}
+
+enum class Direction(val directionValue: Int) {
+    A(1), B(2)
 }

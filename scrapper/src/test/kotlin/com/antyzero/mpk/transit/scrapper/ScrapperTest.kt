@@ -1,6 +1,7 @@
 package com.antyzero.mpk.transit.scrapper
 
 import com.antyzero.mpk.transit.scrapper.mock.MockTimetablesSites
+import com.antyzero.mpk.transit.scrapper.site.Direction
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
@@ -54,6 +55,21 @@ class ScrapperTest {
         @BeforeEach
         internal fun setUp() {
             timetable = scrapper.timetable()
+        }
+
+        @Test
+        internal fun lineStops() {
+            timetable.lineStops(1, Direction.A).test()
+                    .assertValueCount(21)
+                    .assertComplete()
+        }
+
+        @Test
+        @DisplayName("Extended information about line")
+        internal fun lineInfo() {
+            timetable.line(1).test()
+                    .assertValueCount(1)
+                    .assertComplete()
         }
 
         @Test

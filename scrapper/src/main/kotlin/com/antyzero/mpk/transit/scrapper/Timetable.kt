@@ -4,11 +4,38 @@ import com.antyzero.mpk.transit.scrapper.model.Line
 import com.antyzero.mpk.transit.scrapper.model.Modifications
 import com.antyzero.mpk.transit.scrapper.model.Stop
 import com.antyzero.mpk.transit.scrapper.model.Type
+import com.antyzero.mpk.transit.scrapper.site.Direction
 import com.antyzero.mpk.transit.scrapper.site.TimetablesSites
 import io.reactivex.Flowable
 import java.time.LocalDate
 
 class Timetable(private val timetablesSites: TimetablesSites, private val timetableDay: LocalDate) {
+
+    fun line(vararg lineNumber: Int) = line(Flowable.fromIterable(lineNumber.toList()))
+
+    fun lineF(flowable: Flowable<Line>) = line(flowable.map(Line::lineNumber))
+
+    fun line(flowable: Flowable<Int>): Flowable<Void> {
+        flowable
+                .concatMap {
+                    val lineNumber = it
+                    return@concatMap lines()
+                            .filter { it.lineNumber == lineNumber }
+                            .zipWith(timetablesSites.line(lineNumber, Direction.A, timetableDay))
+                }
+
+        return Flowable.just(null)
+    }
+
+    fun lineStops(lineNumber: Int, direction: Direction): Flowable<Stop> {
+        return timetablesSites.line(lineNumber, direction, timetableDay)
+                .concatMap { Flowable.fromIterable(REGEXP_LINE_STOPS.findAll(it).asIterable()) }
+                .map {
+                    val stopName = it.groupValues[1].trim()
+                    val stopId = it.groupValues[2]
+                    Stop(stopId, stopName)
+                }
+    }
 
     fun lines(): Flowable<Line> {
         return timetablesSites.lines(timetableDay)
@@ -40,6 +67,7 @@ class Timetable(private val timetablesSites: TimetablesSites, private val timeta
     companion object {
 
         private val REGEXP_LINE_DATA = "<a.+?class='(linia\\w?)' style='\\s+border:\\s2px\\ssolid\\s(.+?);.+?>\\s+?(\\d+?)\\s+?<\\/a>".toRegex()
+        private val REGEXP_LINE_STOPS = "<span style=' white-space.+?>(.+?)</span>.+?<a.+?&przystanek=(\\w+?)'".toRegex(RegexOption.DOT_MATCHES_ALL)
         private val REGEXP_STOP = "&przystanek=([\\w]+?)'.+?<span.+?>(.+?)<".toRegex(RegexOption.DOT_MATCHES_ALL)
     }
 }

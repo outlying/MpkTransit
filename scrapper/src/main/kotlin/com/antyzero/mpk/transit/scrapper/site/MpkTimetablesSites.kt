@@ -19,7 +19,7 @@ class MpkTimetablesSites(
         return execute(request)
     }
 
-    override fun line(line: Int, timetableDay: LocalDate): Flowable<String> {
+    override fun line(line: Int, direction: Direction, timetableDay: LocalDate): Flowable<String> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
