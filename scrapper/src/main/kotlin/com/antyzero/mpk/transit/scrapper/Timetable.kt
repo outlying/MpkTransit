@@ -7,6 +7,7 @@ import com.antyzero.mpk.transit.scrapper.model.Type
 import com.antyzero.mpk.transit.scrapper.site.Direction
 import com.antyzero.mpk.transit.scrapper.site.TimetablesSites
 import io.reactivex.Flowable
+import io.reactivex.functions.BiFunction
 import java.time.LocalDate
 
 class Timetable(private val timetablesSites: TimetablesSites, private val timetableDay: LocalDate) {
@@ -15,16 +16,22 @@ class Timetable(private val timetablesSites: TimetablesSites, private val timeta
 
     fun lineF(flowable: Flowable<Line>) = line(flowable.map(Line::lineNumber))
 
-    fun line(flowable: Flowable<Int>): Flowable<Void> {
-        flowable
+    fun line(flowable: Flowable<Int>): Flowable<Triple<Line, List<Stop>, List<Stop>>> {
+        return flowable
                 .concatMap {
                     val lineNumber = it
+                    val stopsA = lineStops(it, Direction.A).toList().toFlowable()
+                    val stopsB = lineStops(it, Direction.B).toList().toFlowable()
+
                     return@concatMap lines()
                             .filter { it.lineNumber == lineNumber }
-                            .zipWith(timetablesSites.line(lineNumber, Direction.A, timetableDay))
+                            .zipWith(stopsA, BiFunction<Line, List<Stop>, Pair<Line, List<Stop>>> { line, stopListA ->
+                                line to stopListA
+                            })
+                            .zipWith(stopsB, BiFunction<Pair<Line, List<Stop>>, List<Stop>, Triple<Line, List<Stop>, List<Stop>>> { lineWithStopsA, stopListB ->
+                                Triple(lineWithStopsA.first, lineWithStopsA.second, stopListB)
+                            })
                 }
-
-        return Flowable.just(null)
     }
 
     fun lineStops(lineNumber: Int, direction: Direction): Flowable<Stop> {

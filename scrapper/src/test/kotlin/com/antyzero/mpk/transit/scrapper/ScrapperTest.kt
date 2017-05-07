@@ -1,5 +1,6 @@
 package com.antyzero.mpk.transit.scrapper
 
+import com.antyzero.mpk.transit.scrapper.mock.Line144MockTimetablesSites
 import com.antyzero.mpk.transit.scrapper.mock.MockTimetablesSites
 import com.antyzero.mpk.transit.scrapper.site.Direction
 import org.junit.jupiter.api.BeforeEach
@@ -88,7 +89,33 @@ class ScrapperTest {
                     .assertValueCount(1408)
                     .assertNoErrors()
                     .assertComplete()
-                    .values()
         }
     }
+
+    @Nested
+    @DisplayName("Line with different stops for direction")
+    inner class DirectionTimetablesTest {
+
+        private lateinit var timetables: Timetable
+
+        @BeforeEach
+        internal fun setUp() {
+            scrapper = Scrapper(Line144MockTimetablesSites())
+            timetables = scrapper.timetable()
+        }
+
+        @Test
+        internal fun directionA() {
+
+            timetables.lineStops(144, Direction.A).blockingSubscribe {
+                println(it)
+            }
+
+            timetables.lineStops(144, Direction.A).test()
+                    .assertValueCount(28)
+                    .assertNoErrors()
+                    .assertComplete()
+        }
+    }
+
 }

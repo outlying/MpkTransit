@@ -9,7 +9,7 @@ import java.time.LocalDate
 import java.util.*
 
 
-class MockTimetablesSites : TimetablesSites {
+open class MockTimetablesSites : TimetablesSites {
 
     override fun main(): Flowable<String> = getFileFlowable("site_main.html")
 
@@ -41,5 +41,5 @@ class MockTimetablesSites : TimetablesSites {
         return result.toString()
     }
 
-    private fun getFileFlowable(fileName: String): Flowable<String> = Flowable.just(getFile(fileName))
+    protected fun getFileFlowable(fileName: String): Flowable<String> = Flowable.just(getFile(fileName))
 }
