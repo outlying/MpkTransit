@@ -3,10 +3,7 @@ package com.antyzero.mpk.transit.scrapper
 import com.antyzero.mpk.transit.scrapper.mock.Line144MockTimetablesSites
 import com.antyzero.mpk.transit.scrapper.mock.MockTimetablesSites
 import com.antyzero.mpk.transit.scrapper.site.Direction
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.DisplayName
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.*
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -59,9 +56,10 @@ class ScrapperTest {
         }
 
         @Test
+        @DisplayName("Get all stops in direction A for a line")
         internal fun lineStops() {
             timetable.lineStops(1, Direction.A).test()
-                    .assertValueCount(21)
+                    .assertValueCount(22)
                     .assertComplete()
         }
 
@@ -90,32 +88,50 @@ class ScrapperTest {
                     .assertNoErrors()
                     .assertComplete()
         }
-    }
-
-    @Nested
-    @DisplayName("Line with different stops for direction")
-    inner class DirectionTimetablesTest {
-
-        private lateinit var timetables: Timetable
-
-        @BeforeEach
-        internal fun setUp() {
-            scrapper = Scrapper(Line144MockTimetablesSites())
-            timetables = scrapper.timetable()
-        }
 
         @Test
-        internal fun directionA() {
+        @DisplayName("Gather detailed data for all lines")
+        @Disabled("This is stress test, just to see how long it take to scrap detailed line data")
+        internal fun gatherAll() {
+            val startTime = System.currentTimeMillis()
+            timetable.lines()
+                    .concatMap { timetable.line(it.lineNumber) }
+                    .doOnEach {
+                        println("$it\nSo far: ${(System.currentTimeMillis() - startTime)/1000} [s]")
+                    }
+                    .test()
+                    .assertNoErrors()
+        }
 
-            timetables.lineStops(144, Direction.A).blockingSubscribe {
-                println(it)
+        @Nested
+        @DisplayName("Line 144 with different stop sets for each direction")
+        inner class DirectionTimetablesTest {
+
+            private lateinit var timetables: Timetable
+
+            @BeforeEach
+            internal fun setUp() {
+                scrapper = Scrapper(Line144MockTimetablesSites())
+                timetables = scrapper.timetable()
             }
 
-            timetables.lineStops(144, Direction.A).test()
-                    .assertValueCount(28)
-                    .assertNoErrors()
-                    .assertComplete()
+            @Test
+            @DisplayName("Check stops in direction A")
+            internal fun directionA() {
+                timetables.lineStops(144, Direction.A).test()
+                        .assertValueCount(28)
+                        .assertNoErrors()
+                        .assertComplete()
+            }
+
+            @Test
+            @DisplayName("Check stops in direction B")
+            internal fun directionB() {
+                timetables.lineStops(144, Direction.B).test()
+                        .assertValueCount(30)
+                        .assertNoErrors()
+                        .assertComplete()
+            }
         }
     }
-
 }

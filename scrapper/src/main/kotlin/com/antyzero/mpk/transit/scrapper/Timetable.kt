@@ -73,8 +73,8 @@ class Timetable(private val timetablesSites: TimetablesSites, private val timeta
 
     companion object {
 
-        private val REGEXP_LINE_DATA = "<a.+?class='(linia\\w?)' style='\\s+border:\\s2px\\ssolid\\s(.+?);.+?>\\s+?(\\d+?)\\s+?<\\/a>".toRegex()
-        private val REGEXP_LINE_STOPS = "<span style=' white-space.+?>(.+?)</span>.+?<a.+?&przystanek=(\\w+?)'".toRegex(RegexOption.DOT_MATCHES_ALL)
+        private val REGEXP_LINE_DATA = "<a.+?class='(linia\\w?)' style='\\s+border:\\s2px\\ssolid\\s(.+?);.+?>\\s+?(\\d+?)\\s+?</a>".toRegex()
+        private val REGEXP_LINE_STOPS = "<td style=' text-align: right; '>(?:.+?<span.+?>)?(.+?)(?:</span>.+?)?</td>.+?<a.+?&przystanek=(\\w+?)'".toRegex(RegexOption.DOT_MATCHES_ALL)
         private val REGEXP_STOP = "&przystanek=([\\w]+?)'.+?<span.+?>(.+?)<".toRegex(RegexOption.DOT_MATCHES_ALL)
     }
 }
