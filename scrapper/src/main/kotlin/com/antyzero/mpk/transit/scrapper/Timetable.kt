@@ -40,7 +40,6 @@ class Timetable(private val timetablesSites: TimetablesSites, private val timeta
                     val stopId = it.groupValues[2]
                     Stop(stopId, stopName)
                 }
-                .distinct()
     }
 
     fun lines(): Flowable<Line> {

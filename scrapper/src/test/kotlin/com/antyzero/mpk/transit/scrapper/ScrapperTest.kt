@@ -3,7 +3,6 @@ package com.antyzero.mpk.transit.scrapper
 import com.antyzero.mpk.transit.scrapper.mock.Line144MockTimetablesSites
 import com.antyzero.mpk.transit.scrapper.mock.MockTimetablesSites
 import com.antyzero.mpk.transit.scrapper.site.Direction
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.*
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -60,13 +59,7 @@ class ScrapperTest {
         @DisplayName("Get all stops in direction A for a line")
         internal fun lineStops() {
             timetable.lineStops(1, Direction.A).test()
-                    .assertValueCount(21)
-                    .assertOf {
-                        it.values().reduce({ first, second ->
-                            assertThat(first).isNotEqualTo(second)
-                            return@reduce second
-                        })
-                    }
+                    .assertValueCount(22)
                     .assertComplete()
         }
 
