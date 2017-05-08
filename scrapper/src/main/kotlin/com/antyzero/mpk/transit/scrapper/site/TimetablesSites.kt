@@ -22,6 +22,7 @@ interface TimetablesSites {
 
 }
 
-enum class Direction(val directionValue: Int) {
+@Deprecated(message = "We may have more than 2 directions, it's unspecified how many are allowed")
+enum class Direction(val value: Int) {
     A(1), B(2)
 }

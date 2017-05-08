@@ -19,7 +19,10 @@ class MpkTimetablesSites(
     }
 
     override fun line(line: Int, direction: Direction, timetableDay: LocalDate): Flowable<String> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val request = Request.Builder().apply {
+            url(baseUrl + "?rozklad=${timetableDay.format(DATE_FORMAT)}&linia=${line}__${direction.value}")
+        }.build()
+        return execute(request)
     }
 
     override fun lines(timetableDay: LocalDate): Flowable<String> {

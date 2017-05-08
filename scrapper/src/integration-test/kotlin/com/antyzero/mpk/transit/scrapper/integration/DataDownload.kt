@@ -1,6 +1,7 @@
 package com.antyzero.mpk.transit.scrapper.integration
 
 import com.antyzero.mpk.transit.scrapper.Scrapper
+import com.antyzero.mpk.transit.scrapper.site.Direction
 import com.antyzero.mpk.transit.scrapper.site.MpkTimetablesSites
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -43,8 +44,9 @@ class DataDownload {
         internal fun downloadAllLinesSimple() {
             scrapper.timetable().lines().test()
                     .assertComplete()
+                    .assertNoErrors()
                     .assertOf {
-                        assertThat(it.valueCount()).isGreaterThan(100)
+                        assertThat(it.valueCount()).isGreaterThan(190)
                     }
         }
 
@@ -52,9 +54,24 @@ class DataDownload {
         internal fun downloadAllStops() {
             scrapper.timetable().stops().test()
                     .assertComplete()
+                    .assertNoErrors()
                     .assertOf {
                         assertThat(it.valueCount()).isGreaterThan(1000)
                     }
+        }
+
+        @Test
+        internal fun getStopsInDirection() {
+            scrapper.timetable().lineStops(52,Direction.A).test()
+                    .assertComplete()
+                    .assertNoErrors()
+        }
+
+        @Test
+        internal fun fullLineData() {
+            scrapper.timetable().line(1).test()
+                    .assertComplete()
+                    .assertNoErrors()
         }
     }
 }
