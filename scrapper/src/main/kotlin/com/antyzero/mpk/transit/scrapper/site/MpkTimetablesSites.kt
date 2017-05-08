@@ -3,7 +3,6 @@ package com.antyzero.mpk.transit.scrapper.site
 import io.reactivex.Flowable
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -45,7 +44,7 @@ class MpkTimetablesSites(
             Flowable.just(okHttpClient.newCall(request).execute().body().string())
 
     companion object {
-        val DEFAULT_URL = "http://rozklady.mpk.krakow.pl/"
+        private const val DEFAULT_URL = "http://rozklady.mpk.krakow.pl/"
         private val DATE_FORMAT = DateTimeFormatter.ofPattern("ddMMyyyy")
     }
 

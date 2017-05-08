@@ -14,8 +14,6 @@ class Timetable(private val timetablesSites: TimetablesSites, private val timeta
 
     fun line(vararg lineNumber: Int) = line(Flowable.fromIterable(lineNumber.toList()))
 
-    fun lineF(flowable: Flowable<Line>) = line(flowable.map(Line::lineNumber))
-
     fun line(flowable: Flowable<Int>): Flowable<Triple<Line, List<Stop>, List<Stop>>> {
         return flowable
                 .concatMap {
