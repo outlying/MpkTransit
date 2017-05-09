@@ -67,7 +67,7 @@ afterEvaluate {
             def testClassesTask = project.tasks.getByName('integrationTestClasses')
             dependsOn testClassesTask
 
-            classpath = project.sourceSets.integrationTest.runtimeClasspath + project.configurations.junitPlatform
+            classpath = project.sourceSets.integrationTest.runtimeClasspath //+ project.configurations.junitPlatform
 
             def paramsA = []
             paramsA.add("--reports-dir")
