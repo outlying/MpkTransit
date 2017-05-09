@@ -19,6 +19,12 @@ junitPlatform {
     // logManager 'org.apache.logging.log4j.jul.LogManager'
 }
 
+kotlin {
+    experimental {
+        coroutines 'enable'
+    }
+}
+
 sourceSets {
     integrationTest {
         java {
@@ -48,13 +54,14 @@ tasks.withType(Test) {
 check.dependsOn integrationTest
 integrationTest.mustRunAfter test
 
-ext.junitJupiterVersion  = '5.0.0-M4'
+ext.junitJupiterVersion = '5.0.0-M4'
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
     compile "io.reactivex.rxjava2:rxjava:2.0.9"
     compile 'mysql:mysql-connector-java:6.0.6'
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.12"
 
     testCompile 'org.assertj:assertj-core:3.7.0'
     testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
