@@ -19,6 +19,11 @@ class DataDownload {
     }
 
     @Test
+    internal fun failing() {
+        throw IllegalStateException("This should FAIL!!!")
+    }
+
+    @Test
     @DisplayName("Checking timetable update dates")
     internal fun downloadDates() {
         scrapper.timetableDates().test()
