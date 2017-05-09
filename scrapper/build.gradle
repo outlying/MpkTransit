@@ -32,9 +32,9 @@ sourceSets {
         java {
             compileClasspath += main.output + test.output
             runtimeClasspath += main.output + test.output
-            srcDir file('src/integration-test/kotlin')
+            srcDir project.file('src/integration/kotlin')
         }
-        resources.srcDir file('src/integration-test/resources')
+        resources.srcDir project.file('src/integration/resources')
     }
 }
 
@@ -43,17 +43,10 @@ configurations {
     integrationTestRuntime.extendsFrom testRuntime
 }
 
-task oldIntegrationTest(type: Test) {
-    testClassesDir = sourceSets.integrationTest.output.classesDir
-    classpath = sourceSets.integrationTest.runtimeClasspath
-    outputs.upToDateWhen { false }
-}
-
 afterEvaluate {
 
     JavaExec junitIntegrationTestTask = project.tasks.create("integrationTest", JavaExec) {
         it.with {
-
 
             group = JavaBasePlugin.VERIFICATION_GROUP
             description = 'Runs instrumentation tests on the JUnit Platform.'
@@ -63,17 +56,15 @@ afterEvaluate {
             outputs.upToDateWhen { false }
             outputs.dir reportsDir
 
+            classpath = sourceSets.integrationTest.runtimeClasspath + project.configurations.junitPlatform
+
             //configureTaskDependencies(project, it, junitExtension)
             def testClassesTask = project.tasks.getByName('integrationTestClasses')
             dependsOn testClassesTask
 
-            classpath = project.sourceSets.integrationTest.runtimeClasspath //+ project.configurations.junitPlatform
-
             def paramsA = []
-            paramsA.add("--reports-dir")
-            paramsA.add(reportsDir.getAbsolutePath())
-            paramsA.add("--details")
-            paramsA.add("none")
+            paramsA.addAll(["--reports-dir", reportsDir.getAbsolutePath()])
+            paramsA.addAll(["--details", "tree"])
 
             def rootDirs = []
             project.sourceSets.each { sourceSet ->
@@ -85,14 +76,9 @@ afterEvaluate {
             }
             paramsA.addAll(['--scan-class-path', rootDirs.join(File.pathSeparator)])
 
-            paramsA.forEach {
-                System.out.println(it)
-            }
-
-            args paramsA.toList()
+            args paramsA
             main ConsoleLauncher.class.getName()
         }
-
     }
 
     check.dependsOn junitIntegrationTestTask
