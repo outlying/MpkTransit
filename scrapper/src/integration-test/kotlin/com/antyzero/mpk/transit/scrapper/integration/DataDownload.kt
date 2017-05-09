@@ -4,11 +4,9 @@ import com.antyzero.mpk.transit.scrapper.Scrapper
 import com.antyzero.mpk.transit.scrapper.site.Direction
 import com.antyzero.mpk.transit.scrapper.site.MpkTimetablesSites
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.DisplayName
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.*
 
+@DisplayName("")
 class DataDownload {
 
     lateinit var scrapper: Scrapper
@@ -16,6 +14,9 @@ class DataDownload {
     @BeforeEach
     internal fun setUp() {
         scrapper = Scrapper(MpkTimetablesSites())
+
+        // TODO in future assume internet connection before doing integration test
+        // Assumptions.assumeTrue(false, "Text")
     }
 
     @Test

@@ -1,10 +1,10 @@
 package com.antyzero.mpk.transit.scrapper
 
+import com.antyzero.mpk.transit.scrapper.site.MpkTimetablesSites
 import com.antyzero.mpk.transit.scrapper.site.TimetablesSites
 import io.reactivex.Flowable
 import java.time.LocalDate
 import java.time.LocalDateTime
-
 
 class Scrapper(private val timetablesSites: TimetablesSites) {
 
@@ -40,6 +40,12 @@ class Scrapper(private val timetablesSites: TimetablesSites) {
 
         private val REGEXP_TIMETABLE_DATE = "rozklad=(\\d{4})(\\d{2})(\\d{2})\'.+?\\d{4}-\\d{2}-\\d{2}".toRegex()
         private val REGEXP_LAST_UPDATE = "aktualizacja (\\d{4})-(\\d{2})-(\\d{2})\\s(\\d{2}):(\\d{2})".toRegex()
+
+        @JvmStatic
+        fun main(vararg args: String){
+            val scrapper = Scrapper(MpkTimetablesSites())
+            println(scrapper.timetable().stops())
+        }
     }
 }
 

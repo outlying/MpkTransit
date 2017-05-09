@@ -1,3 +1,5 @@
+import org.junit.platform.console.ConsoleLauncher
+
 apply plugin: 'kotlin'
 apply plugin: 'org.junit.platform.gradle.plugin'
 
@@ -14,7 +16,7 @@ junitPlatform {
         }
         // includeClassNamePattern '.*Test'
     }
-    // enableStandardTestTask true
+    enableStandardTestTask true
     // reportsDir file('build/test-results/junit-platform') // this is the default
     // logManager 'org.apache.logging.log4j.jul.LogManager'
 }
@@ -41,18 +43,65 @@ configurations {
     integrationTestRuntime.extendsFrom testRuntime
 }
 
-task integrationTest(type: Test) {
+task oldIntegrationTest(type: Test) {
     testClassesDir = sourceSets.integrationTest.output.classesDir
     classpath = sourceSets.integrationTest.runtimeClasspath
     outputs.upToDateWhen { false }
 }
 
+afterEvaluate {
+
+    JavaExec junitIntegrationTestTask = project.tasks.create("integrationTest", JavaExec) {
+        it.with {
+
+
+            group = JavaBasePlugin.VERIFICATION_GROUP
+            description = 'Runs instrumentation tests on the JUnit Platform.'
+
+            def reportsDir = project.file("$project.buildDir/test-integration-results/junit-platform")
+
+            outputs.upToDateWhen { false }
+            outputs.dir reportsDir
+
+            //configureTaskDependencies(project, it, junitExtension)
+            def testClassesTask = project.tasks.getByName('integrationTestClasses')
+            dependsOn testClassesTask
+
+            classpath = project.sourceSets.integrationTest.runtimeClasspath + project.configurations.junitPlatform
+
+            def paramsA = []
+            paramsA.add("--reports-dir")
+            paramsA.add(reportsDir.getAbsolutePath())
+            paramsA.add("--details")
+            paramsA.add("none")
+
+            def rootDirs = []
+            project.sourceSets.each { sourceSet ->
+                if (sourceSet.name == "integrationTest") {
+                    rootDirs.add(sourceSet.output.classesDir)
+                    rootDirs.add(sourceSet.output.resourcesDir)
+                    rootDirs.addAll(sourceSet.output.dirs.files)
+                }
+            }
+            paramsA.addAll(['--scan-class-path', rootDirs.join(File.pathSeparator)])
+
+            paramsA.forEach {
+                System.out.println(it)
+            }
+
+            args paramsA.toList()
+            main ConsoleLauncher.class.getName()
+        }
+
+    }
+
+    check.dependsOn junitIntegrationTestTask
+    junitIntegrationTestTask.mustRunAfter test
+}
+
 tasks.withType(Test) {
     reports.html.destination = file("${reporting.baseDir}/${name}")
 }
-
-check.dependsOn integrationTest
-integrationTest.mustRunAfter test
 
 ext.junitJupiterVersion = '5.0.0-M4'
 
