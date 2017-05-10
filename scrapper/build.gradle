@@ -32,9 +32,8 @@ sourceSets {
         java {
             compileClasspath += main.output + test.output
             runtimeClasspath += main.output + test.output
-            srcDir project.file('src/integration/kotlin')
         }
-        resources.srcDir project.file('src/integration/resources')
+        resources.srcDir project.file('src/integrationTest/resources')
     }
 }
 
