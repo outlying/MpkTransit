@@ -27,19 +27,18 @@ kotlin {
     }
 }
 
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
 sourceSets {
     integrationTest {
         java {
             compileClasspath += main.output + test.output
             runtimeClasspath += main.output + test.output
         }
-        resources.srcDir project.file('src/integrationTest/resources')
     }
-}
-
-configurations {
-    integrationTestCompile.extendsFrom testCompile
-    integrationTestRuntime.extendsFrom testRuntime
 }
 
 afterEvaluate {
@@ -101,7 +100,7 @@ dependencies {
     testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
 
-    integrationTestCompile 'org.assertj:assertj-core:3.0.0'
+    integrationTestCompile 'org.assertj:assertj-core:3.7.0'
     integrationTestCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
     integrationTestRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
 }

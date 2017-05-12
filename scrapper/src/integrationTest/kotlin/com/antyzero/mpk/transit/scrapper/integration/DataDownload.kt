@@ -6,7 +6,7 @@ import com.antyzero.mpk.transit.scrapper.site.MpkTimetablesSites
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.*
 
-@DisplayName("")
+@DisplayName("Data download test")
 class DataDownload {
 
     lateinit var scrapper: Scrapper
