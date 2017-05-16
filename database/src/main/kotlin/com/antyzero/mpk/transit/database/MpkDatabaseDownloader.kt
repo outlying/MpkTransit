@@ -7,7 +7,7 @@ import java.io.File
 
 class MpkDatabaseDownloader(private val okHttpClient: OkHttpClient = OkHttpClient()) {
 
-    fun get() {
+    fun get(): String {
         val request = Request.Builder()
                 .method("POST", RequestBody.create(MediaType.parse("application/json"), ""))
                 .url("http://m.rozklady.mpk.krakow.pl/Services/data.asmx/GetDatabase")
@@ -20,8 +20,10 @@ class MpkDatabaseDownloader(private val okHttpClient: OkHttpClient = OkHttpClien
                 .url(downloadUrl)
                 .build()
 
-        val targetFile = File.createTempFile("mpk", "zip")
+        val targetFile = File.createTempFile("mpk", ".sqlite")
         download(okHttpClient.newCall(downloadRequest).execute(), targetFile)
+
+        return "jdbc:sqlite:${targetFile.absoluteFile}"
     }
 
     private fun download(response: Response, target: File) {
