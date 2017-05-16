@@ -9,16 +9,20 @@ class MpkDatabaseTest {
 
     @Test
     internal fun lines() {
-        print(mpkDatabase.lines().joinToString(separator = "\n"))
+        mpkDatabase.lines().presentResults()
     }
 
     @Test
     internal fun points() {
-        print(mpkDatabase.points().joinToString(separator = "\n"))
+        mpkDatabase.points().presentResults()
     }
 
     @Test
     internal fun shedules() {
-        print(mpkDatabase.shedules().joinToString(separator = "\n"))
+        mpkDatabase.shedules().presentResults()
+    }
+
+    private fun Collection<Any>.presentResults() {
+        print(this.joinToString(separator = "\n"))
     }
 }
