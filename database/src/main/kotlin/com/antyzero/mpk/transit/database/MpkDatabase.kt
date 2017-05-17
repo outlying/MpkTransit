@@ -1,9 +1,6 @@
 package com.antyzero.mpk.transit.database
 
-import com.antyzero.mpk.transit.database.model.Line
-import com.antyzero.mpk.transit.database.model.Point
-import com.antyzero.mpk.transit.database.model.Shedule
-import com.antyzero.mpk.transit.database.model.TransportType
+import com.antyzero.mpk.transit.database.model.*
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.ResultSet
@@ -39,14 +36,92 @@ class MpkDatabase(databasePath: String) {
         }
     }
 
+    fun routes() = with(statement.executeQuery("SELECT * FROM 'Routes'")) {
+        mutableListOf<Route>().apply {
+            this@with.collect {
+                add(convertToRoute(it))
+            }
+        }
+    }
+
+    fun stopDepartures() = with(statement.executeQuery("SELECT * FROM 'StopDepartures'")) {
+        mutableListOf<StopDeparture>().apply {
+            this@with.collect {
+                add(convertToStopDeparture(it))
+            }
+        }
+    }
+
+    fun stops() = with(statement.executeQuery("SELECT * FROM 'Stops'")){
+        mutableListOf<Stop>().apply {
+            this@with.collect {
+                add(convertToStop(it))
+            }
+        }
+    }
+
+    fun streets() = with(statement.executeQuery("SELECT * FROM 'Street'")){
+        mutableListOf<Street>().apply {
+            this@with.collect {
+                add(convertToStreet(it))
+            }
+        }
+    }
+
+    private fun convertToStreet(resultSet: ResultSet)=Street(
+            id = resultSet.getInt("Id"),
+            name = resultSet.getString("Name"),
+            firstLetter = resultSet.getString("FirstLetter")
+    )
+
+    private fun convertToStop(resultSet: ResultSet) = Stop(
+            id = resultSet.getInt("Id"),
+            name = resultSet.getString("Name"),
+            symbol = resultSet.getObject("Symbol").toString(),
+            firstLetter = resultSet.getObject("firstLetter").toString().toCharArray()[0]
+    )
+
+    private fun convertToStopDeparture(resultSet: ResultSet) = StopDeparture(
+            variantId = resultSet.getInt("VariantId"),
+            no = resultSet.getInt("No"),
+            pointId = resultSet.getInt("PointId"),
+            pointName = resultSet.getString("PointName"),
+            onDemand = resultSet.getBoolean("OnDemand"),
+            stopId = resultSet.getInt("StopId"),
+            stopName = resultSet.getString("StopName"),
+            stopSymbol = resultSet.getString("StopSymbol"),
+            streetId = resultSet.getInt("StreetId"),
+            streetName = resultSet.getString("StreetName"),
+            lineName = resultSet.getString("LineName"),
+            sortCol = resultSet.getInt("SortCol"),
+            lastPoint = resultSet.getInt("LastPoint"),
+            lastStopId = resultSet.getInt("LastStopId"),
+            lastStopName = resultSet.getString("LastStopName"),
+            from = resultSet.getString("From").toDateTime(),
+            to = resultSet.getString("To").toDateTime()
+    )
+
+    private fun convertToRoute(resultSet: ResultSet) = Route(
+            variantId = resultSet.getInt("VariantId"),
+            no = resultSet.getInt("No"),
+            pointId = resultSet.getInt("PointId"),
+            pointName = resultSet.getString("PointName"),
+            onDemand = resultSet.getBoolean("OnDemand"),
+            stopId = resultSet.getInt("StopId"),
+            stopSymbol = resultSet.getString("StopSymbol"),
+            streetId = resultSet.getInt("StreetId"),
+            stopName = resultSet.getString("StopName"),
+            streetName = resultSet.getString("StreetName")
+    )
+
     private fun convertToShedule(resultSet: ResultSet) = Shedule(
             id = resultSet.getInt("Id"),
             type = resultSet.getInt("Type"),
             lineName = resultSet.getInt("LineName"),
-            from = resultSet.getString("From"),
-            stopFrom = resultSet.getString("StopFrom"),
-            to = resultSet.getString("To"),
-            lastUpdate = resultSet.getString("LastUpdate")
+            from = resultSet.getString("From").toDateTime(),
+            stopFrom = resultSet.getString("StopFrom").toDateTime(),
+            to = resultSet.getString("To").toDateTime(),
+            lastUpdate = resultSet.getString("LastUpdate").toDateTime()
     )
 
     private fun convertToPoint(resultSet: ResultSet) = Point(

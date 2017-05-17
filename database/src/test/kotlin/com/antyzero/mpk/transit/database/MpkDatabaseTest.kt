@@ -22,6 +22,26 @@ class MpkDatabaseTest {
         mpkDatabase.shedules().presentResults()
     }
 
+    @Test
+    internal fun routes() {
+        mpkDatabase.routes().presentResults()
+    }
+
+    @Test
+    internal fun stopDepartures() {
+        mpkDatabase.stopDepartures().presentResults()
+    }
+
+    @Test
+    internal fun stops() {
+        mpkDatabase.stops().presentResults()
+    }
+
+    @Test
+    internal fun streets() {
+        mpkDatabase.streets().presentResults()
+    }
+
     private fun Collection<Any>.presentResults() {
         print(this.joinToString(separator = "\n"))
     }
