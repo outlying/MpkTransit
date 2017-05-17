@@ -43,6 +43,6 @@ class MpkDatabaseTest {
     }
 
     private fun Collection<Any>.presentResults() {
-        print(this.joinToString(separator = "\n"))
+        //print(this.joinToString(separator = "\n"))
     }
 }
