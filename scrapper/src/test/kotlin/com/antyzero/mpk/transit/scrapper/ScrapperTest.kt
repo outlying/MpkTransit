@@ -3,6 +3,7 @@ package com.antyzero.mpk.transit.scrapper
 import com.antyzero.mpk.transit.scrapper.mock.Line144MockTimetablesSites
 import com.antyzero.mpk.transit.scrapper.mock.MockTimetablesSites
 import com.antyzero.mpk.transit.scrapper.site.Direction
+import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.jupiter.api.*
 import java.time.LocalDate
 import java.time.LocalDateTime

@@ -8,17 +8,9 @@ junitPlatform {
     filters {
         engines {
             include 'junit-jupiter' //, 'junit-vintage'
-            // exclude 'custom-engine'
         }
-        tags {
-            // include 'fast'
-            exclude 'slow'
-        }
-        // includeClassNamePattern '.*Test'
     }
-    enableStandardTestTask true
-    // reportsDir file('build/test-results/junit-platform') // this is the default
-    // logManager 'org.apache.logging.log4j.jul.LogManager'
+    details = "verbose"
 }
 
 kotlin {
