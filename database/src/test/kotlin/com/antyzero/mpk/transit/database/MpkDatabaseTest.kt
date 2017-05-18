@@ -65,12 +65,10 @@ class MpkDatabaseTest {
     }
 
     private fun Collection<Any>.generalTest() = this.apply {
-        assertThat(this)
-                .isNotNull()
-                .isNotEmpty
+        assertThat(this).isNotEmpty
     }
 
     private fun Collection<Any>.presentResults() = this.apply {
-        //print(this.joinToString(separator = "\n"))
+        // print(this.joinToString(separator = "\n"))
     }
 }
