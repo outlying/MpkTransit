@@ -52,7 +52,7 @@ class MpkDatabase(databasePath: String) {
         }
     }
 
-    fun stops() = with(statement.executeQuery("SELECT * FROM 'Stops'")){
+    fun stops() = with(statement.executeQuery("SELECT * FROM 'Stops'")) {
         mutableListOf<Stop>().apply {
             this@with.collect {
                 add(convertToStop(it))
@@ -60,7 +60,7 @@ class MpkDatabase(databasePath: String) {
         }
     }
 
-    fun streets() = with(statement.executeQuery("SELECT * FROM 'Street'")){
+    fun streets() = with(statement.executeQuery("SELECT * FROM 'Streets'")) {
         mutableListOf<Street>().apply {
             this@with.collect {
                 add(convertToStreet(it))
@@ -68,7 +68,34 @@ class MpkDatabase(databasePath: String) {
         }
     }
 
-    private fun convertToStreet(resultSet: ResultSet)=Street(
+    fun variants() = with(statement.executeQuery("SELECT * FROM 'Variants'")) {
+        mutableListOf<Variant>().apply {
+            this@with.collect {
+                add(convertToVariant(it))
+            }
+        }
+    }
+
+    private fun convertToVariant(it: ResultSet) = Variant(
+            id = it.getInt("Id"),
+            lineName = it.getString("LineName"),
+            default = it.getBoolean("Default"),
+            type = it.getInt("Type"),
+            sheduleId = it.getInt("SheduleId"),
+            letter = it.getString("Letter"),
+            name = it.getString("Name"),
+            description = it.getString("Description"),
+            description2 = it.getString("Description2"),
+            firstPoint = it.getInt("FirstPoint"),
+            firstStopId = it.getInt("FirstStopId"),
+            firstStopName = it.getString("FirstStopName"),
+            lastPoint = it.getInt("LastPoint"),
+            lastStopId = it.getInt("LastStopId"),
+            lastStopName = it.getString("LastStopName"),
+            pointCount = it.getInt("PointCount"),
+            visible = it.getBoolean("Visible"))
+
+    private fun convertToStreet(resultSet: ResultSet) = Street(
             id = resultSet.getInt("Id"),
             name = resultSet.getString("Name"),
             firstLetter = resultSet.getString("FirstLetter")
@@ -132,7 +159,7 @@ class MpkDatabase(databasePath: String) {
     )
 
     private fun convertToLine(resultSet: ResultSet) = Line(
-            name = resultSet.getInt("Name"),
+            name = resultSet.getString("Name"),
             transportType = TransportType.findByValue(resultSet.getInt("LineType")),
             lineGroup = resultSet.getInt("LineGroup"),
             lineCarrier = resultSet.getInt("LineCarrier"),

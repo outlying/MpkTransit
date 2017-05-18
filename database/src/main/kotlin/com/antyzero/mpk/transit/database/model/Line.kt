@@ -2,7 +2,7 @@ package com.antyzero.mpk.transit.database.model
 
 
 data class Line(
-        val name: Int,
+        val name: String,
         val transportType: TransportType,
         val lineGroup: Int,
         val lineCarrier: Int,
