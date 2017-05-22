@@ -1,5 +1,7 @@
 package com.antyzero.mpk.transit.creator
 
+import com.antyzero.mpk.transit.creator.model.Stop
+import com.antyzero.mpk.transit.creator.model.Stops
 import com.antyzero.mpk.transit.database.MpkDatabase
 
 
@@ -14,15 +16,16 @@ class DatabaseCreator(mpkDatabase: MpkDatabase) : Creator {
     private val streets = mpkDatabase.streets()
     private val variants = mpkDatabase.variants()
 
-    override fun stops(): List<Stop> {
-
-        return points
-                .sortedBy { it.stopName }
-                .map {
-                    Stop(
-                            stop_id = it.id.toString(),
-                            stop_name = it.stopName,
-                            stop_lat = 0f.toString())
-                }
+    override fun stops(): Stops = with(points
+            .sortedBy { it.stopName }
+            .map {
+                Stop(
+                        id = it.id,
+                        name = it.stopName,
+                        latitude = 0f,
+                        longitude = 0f
+                )
+            }) {
+        Stops().apply { addAll(this) }
     }
 }

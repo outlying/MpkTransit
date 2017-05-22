@@ -8,6 +8,10 @@ class CreatorTest {
 
     @Test
     internal fun hahaha() {
-        print(DatabaseCreator(MpkDatabase(MpkDatabaseDownloader().get())).stops().joinToString(separator = "\n"))
+        val stops = DatabaseCreator(MpkDatabase(MpkDatabaseDownloader().get())).stops()
+
+        print(stops.keys.joinToString { "," })
+        print(stops.joinToString(separator = "\n"))
+
     }
 }

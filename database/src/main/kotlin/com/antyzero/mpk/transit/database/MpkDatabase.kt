@@ -152,7 +152,7 @@ class MpkDatabase(databasePath: String) {
     )
 
     private fun convertToPoint(resultSet: ResultSet) = Point(
-            id = resultSet.getInt("Id"),
+            id = resultSet.getString("Id"),
             name = resultSet.getString("Name"),
             stopId = resultSet.getInt("StopId"),
             stopName = resultSet.getString("StopName")
