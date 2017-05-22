@@ -3,12 +3,17 @@ package com.antyzero.mpk.transit.creator.model
 /**
  * Universal container for CSV like data
  */
-class CsvContainer<T> where T : Map<String, Any?> {
+open class CsvContainer<T>(values:Collection<T> = emptyList(), private val validator: CsvContainer<T>.(Any?) -> Unit = {}) where T : Map<String, Any?> {
 
     val keys: MutableSet<String> = mutableSetOf()
     val list: MutableList<T> = mutableListOf()
 
+    init {
+        values.forEach { add(it) }
+    }
+
     fun add(element: T): Boolean {
+        validator.invoke(this,element)
         element.keys
                 .takeIf { it.containsAll(this.keys) }
                 ?.let {
