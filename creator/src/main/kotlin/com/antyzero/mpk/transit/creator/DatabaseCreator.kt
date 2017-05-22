@@ -1,8 +1,10 @@
 package com.antyzero.mpk.transit.creator
 
+import com.antyzero.mpk.transit.creator.model.Agency
 import com.antyzero.mpk.transit.creator.model.CsvContainer
 import com.antyzero.mpk.transit.creator.model.Stop
 import com.antyzero.mpk.transit.database.MpkDatabase
+import java.util.*
 
 
 class DatabaseCreator(mpkDatabase: MpkDatabase) : Creator {
@@ -15,6 +17,13 @@ class DatabaseCreator(mpkDatabase: MpkDatabase) : Creator {
     private val stops = mpkDatabase.stops()
     private val streets = mpkDatabase.streets()
     private val variants = mpkDatabase.variants()
+
+    override fun agency(): CsvContainer<Agency> = CsvContainer<Agency>().apply {
+        add(Agency(
+                name = "MPK S.A. w Krakowie",
+                url = "http://www.mpk.krakow.pl/",
+                timeZone = TimeZone.getTimeZone("Europe/Warsaw")))
+    }
 
     override fun stops(): CsvContainer<Stop> = with(points
             .sortedBy { it.stopName }
