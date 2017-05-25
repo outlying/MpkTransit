@@ -6,7 +6,8 @@ data class Route(
         val nameShort: String,
         val nameLong: String,
         val type: Type,
-        val agencyId: String? = null) :
+        val agencyId: String? = null,
+        val url: String? = null) :
 
         CsvData(mutableMapOf(
                 "route_id" to id,
@@ -15,6 +16,7 @@ data class Route(
                 "route_type" to type.value.toString())
                 .apply {
                     this.putIfNotNull("agency_id", agencyId)
+                    this.putIfNotNull("route_url", url)
                 }) {
 
     enum class Type(val value: Int) {
