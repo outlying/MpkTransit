@@ -6,9 +6,7 @@ import com.antyzero.mpk.transit.creator.model.Route
 import com.antyzero.mpk.transit.creator.model.Stop
 
 interface Creator {
-
     fun agency(): CsvContainer<Agency>
-
     fun stops(): CsvContainer<Stop>
     fun routes(): CsvContainer<Route>
 }

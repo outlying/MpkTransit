@@ -24,7 +24,7 @@ class MpkDatabaseTest {
 
     @Test
     internal fun shedules() {
-        mpkDatabase.shedules()
+        mpkDatabase.schedules()
                 .generalTest()
                 .presentResults()
     }

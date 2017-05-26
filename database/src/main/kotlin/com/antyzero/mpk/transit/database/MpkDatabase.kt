@@ -7,12 +7,12 @@ import java.sql.ResultSet
 import java.sql.Statement
 
 
-class MpkDatabase(databasePath: String) {
+class MpkDatabase(databasePath: String) : Database {
 
     private val connection: Connection = DriverManager.getConnection(databasePath)
     private val statement: Statement = connection.createStatement()
 
-    fun lines() = with(statement.executeQuery("SELECT * FROM 'Lines' ORDER BY SortCol")) {
+    override fun lines() = with(statement.executeQuery("SELECT * FROM 'Lines' ORDER BY SortCol")) {
         mutableListOf<Line>().apply {
             this@with.collect {
                 add(convertToLine(it))
@@ -20,7 +20,7 @@ class MpkDatabase(databasePath: String) {
         }
     }
 
-    fun points() = with(statement.executeQuery("SELECT * FROM 'Points'")) {
+    override fun points() = with(statement.executeQuery("SELECT * FROM 'Points'")) {
         mutableListOf<Point>().apply {
             this@with.collect {
                 add(convertToPoint(it))
@@ -28,15 +28,15 @@ class MpkDatabase(databasePath: String) {
         }
     }
 
-    fun shedules() = with(statement.executeQuery("SELECT * FROM 'Shedules'")) {
-        mutableListOf<Shedule>().apply {
+    override fun schedules() = with(statement.executeQuery("SELECT * FROM 'Shedules'")) {
+        mutableListOf<Schedule>().apply {
             this@with.collect {
                 add(convertToShedule(it))
             }
         }
     }
 
-    fun routes() = with(statement.executeQuery("SELECT * FROM 'Routes'")) {
+    override fun routes() = with(statement.executeQuery("SELECT * FROM 'Routes'")) {
         mutableListOf<Route>().apply {
             this@with.collect {
                 add(convertToRoute(it))
@@ -44,7 +44,7 @@ class MpkDatabase(databasePath: String) {
         }
     }
 
-    fun stopDepartures() = with(statement.executeQuery("SELECT * FROM 'StopDepartures'")) {
+    override fun stopDepartures() = with(statement.executeQuery("SELECT * FROM 'StopDepartures'")) {
         mutableListOf<StopDeparture>().apply {
             this@with.collect {
                 add(convertToStopDeparture(it))
@@ -52,7 +52,7 @@ class MpkDatabase(databasePath: String) {
         }
     }
 
-    fun stops() = with(statement.executeQuery("SELECT * FROM 'Stops'")) {
+    override fun stops() = with(statement.executeQuery("SELECT * FROM 'Stops'")) {
         mutableListOf<Stop>().apply {
             this@with.collect {
                 add(convertToStop(it))
@@ -60,7 +60,7 @@ class MpkDatabase(databasePath: String) {
         }
     }
 
-    fun streets() = with(statement.executeQuery("SELECT * FROM 'Streets'")) {
+    override fun streets() = with(statement.executeQuery("SELECT * FROM 'Streets'")) {
         mutableListOf<Street>().apply {
             this@with.collect {
                 add(convertToStreet(it))
@@ -68,7 +68,7 @@ class MpkDatabase(databasePath: String) {
         }
     }
 
-    fun variants() = with(statement.executeQuery("SELECT * FROM 'Variants'")) {
+    override fun variants() = with(statement.executeQuery("SELECT * FROM 'Variants'")) {
         mutableListOf<Variant>().apply {
             this@with.collect {
                 add(convertToVariant(it))
@@ -141,7 +141,7 @@ class MpkDatabase(databasePath: String) {
             streetName = resultSet.getString("StreetName")
     )
 
-    private fun convertToShedule(resultSet: ResultSet) = Shedule(
+    private fun convertToShedule(resultSet: ResultSet) = Schedule(
             id = resultSet.getInt("Id"),
             type = resultSet.getInt("Type"),
             lineName = resultSet.getInt("LineName"),

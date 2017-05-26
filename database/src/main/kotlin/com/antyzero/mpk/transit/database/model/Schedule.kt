@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeFormatterBuilder
 
 
-data class Shedule(
+data class Schedule(
         val id: Int,
         val type: Int,
         val lineName: Int,

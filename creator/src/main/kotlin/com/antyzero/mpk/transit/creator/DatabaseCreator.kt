@@ -14,7 +14,7 @@ class DatabaseCreator(mpkDatabase: MpkDatabase) : Creator {
 
     private val lines = mpkDatabase.lines()
     private val points = mpkDatabase.points()
-    private val shedules = mpkDatabase.shedules()
+    private val shedules = mpkDatabase.schedules()
     private val routesMpk = mpkDatabase.routes()
     private val stopDepartures = mpkDatabase.stopDepartures()
     private val stopsMpk = mpkDatabase.stops()
