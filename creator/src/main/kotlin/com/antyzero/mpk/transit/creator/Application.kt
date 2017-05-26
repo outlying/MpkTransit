@@ -29,16 +29,11 @@ fun main(args: Array<String>) {
     println("Total file size: ${totalSize.toLong() / 1024} [Kb]")
 }
 
-private fun Pair<Boolean, File>.printResult(): Pair<Boolean, File> {
-    if (this.first) {
-        println("Created ${second.name}\t${second.absolutePath}")
-    } else {
-        println("Failed ${second.name}")
-    }
-    return this
+private fun Pair<Boolean, File>.printResult() = apply {
+    println(if (first) "Created ${second.name}\t${second.absolutePath}" else "Failed ${second.name}")
 }
 
-private fun Pair<Boolean, File>.sumSize(total: AtomicLong) = this.apply {
+private fun Pair<Boolean, File>.sumSize(total: AtomicLong) = apply {
     total.addAndGet(second.takeIf { first }?.length() ?: 0)
 }
 
