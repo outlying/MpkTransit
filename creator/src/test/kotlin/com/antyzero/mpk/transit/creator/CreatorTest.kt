@@ -23,7 +23,6 @@ class CreatorTest {
     @Test
     internal fun stops() {
         assertThat(data.stops().list).isNotEmpty
-        data.stops()
     }
 
     @Test
