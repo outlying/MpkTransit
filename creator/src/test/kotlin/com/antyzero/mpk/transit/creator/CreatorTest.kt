@@ -2,6 +2,7 @@ package com.antyzero.mpk.transit.creator
 
 import com.antyzero.mpk.transit.database.MpkDatabase
 import com.antyzero.mpk.transit.database.MpkDatabaseDownloader
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -11,22 +12,22 @@ class CreatorTest {
 
     @BeforeEach
     internal fun setUp() {
-        // TODO provide local database for testing
         data = DatabaseCreator(MpkDatabase(MpkDatabaseDownloader().get()))
     }
 
     @Test
     internal fun agency() {
-        print(data.agency())
+        assertThat(data.agency().list).isNotEmpty
     }
 
     @Test
     internal fun stops() {
-        print(data.stops())
+        assertThat(data.stops().list).isNotEmpty
+        data.stops()
     }
 
     @Test
     internal fun routes() {
-        print(data.routes())
+        assertThat(data.routes().list).isNotEmpty
     }
 }
