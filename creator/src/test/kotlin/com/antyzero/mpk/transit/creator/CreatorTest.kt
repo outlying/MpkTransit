@@ -8,25 +8,25 @@ import org.junit.jupiter.api.Test
 
 class CreatorTest {
 
-    lateinit var data: DatabaseCreator
+    lateinit var creator: DatabaseCreator
 
     @BeforeEach
     internal fun setUp() {
-        data = DatabaseCreator(MpkDatabase(MpkDatabaseDownloader().get()))
+        creator = DatabaseCreator(MpkDatabase(MpkDatabaseDownloader().get()))
     }
 
     @Test
     internal fun agency() {
-        assertThat(data.agency().list).isNotEmpty
+        assertThat(creator.agency().list).isNotEmpty
     }
 
     @Test
     internal fun stops() {
-        assertThat(data.stops().list).isNotEmpty
+        assertThat(creator.stops().list).isNotEmpty
     }
 
     @Test
     internal fun routes() {
-        assertThat(data.routes().list).isNotEmpty
+        assertThat(creator.routes().list).isNotEmpty
     }
 }

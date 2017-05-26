@@ -1,8 +1,8 @@
-# Google Transit data generator for MPK Kraków
+# Google Transit creator generator for MPK Kraków
 
 The goal of the project is to convert MPK Kraków public transport timetables to GTFS format supported by Google Transit.
 
-Google Transit data is available on Google Maps so that you can search for public transit connections directly on Google Maps.
+Google Transit creator is available on Google Maps so that you can search for public transit connections directly on Google Maps.
 
 ## Run
 
@@ -24,11 +24,11 @@ For Windows, use `gradlew.bat`
 
 ## Data formats
 
-More about currently used data formats and sources
+More about currently used creator formats and sources
 
 ### MPK
 
-SQLite database downloaded from MPK website is used as data feed. The database is not documented so the meaning of the data must be inferred.
+SQLite database downloaded from MPK website is used as creator feed. The database is not documented so the meaning of the creator must be inferred.
 
 ### GTFS (Google Transit)
 
@@ -40,4 +40,4 @@ Detailed information about GTFS:
 
 #### GTFS Realtime
 
-At the moment, this project does not generate GTFS Realtime compliant data.
+At the moment, this project does not generate GTFS Realtime compliant creator.
