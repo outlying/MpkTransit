@@ -2,7 +2,7 @@ group 'com.antyzero.mpk.transit'
 version '0.0.1-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.1.0'
+    ext.kotlin_version = '1.1.2-2'
 
     repositories {
         mavenCentral()
@@ -10,7 +10,6 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M4'
-
         classpath 'org.apache.commons:commons-lang3:3.5'
     }
 }
