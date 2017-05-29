@@ -26,7 +26,7 @@ class DatabaseCreator(mpkDatabase: MpkDatabase) : Creator {
                 id = "0",
                 name = "MPK S.A. w Krakowie",
                 url = "http://www.mpk.krakow.pl/",
-                timeZone = TimeZone.getTimeZone("Europe/Warsaw")).single(), checkForDuplicates())
+                timeZone = TimeZone.getTimeZone("Europe/Warsaw")).single())
     }
 
     private val stops: CsvContainer<Stop> by lazy {
@@ -40,7 +40,7 @@ class DatabaseCreator(mpkDatabase: MpkDatabase) : Creator {
                             longitude = 0f
                     )
                 }) {
-            CsvContainer(this, checkForDuplicates())
+            CsvContainer(this)
         }
     }
 
@@ -62,7 +62,7 @@ class DatabaseCreator(mpkDatabase: MpkDatabase) : Creator {
                             url = "http://rozklady.mpk.krakow.pl/?linia=${it.name}"
                     )
                 }) {
-            CsvContainer(this, checkForDuplicates())
+            CsvContainer(this)
         }
     }
 
@@ -85,18 +85,6 @@ class DatabaseCreator(mpkDatabase: MpkDatabase) : Creator {
                 }
                 mutable
             }.getOrDefault(lineName, listOf()).getOrNull(0)
-
-    /**
-     * Validator method, universal
-     */
-    private fun <T : Map<String, Any?>> checkForDuplicates(): CsvContainer<T>.(Any?) -> Unit = { stop ->
-        list.forEach {
-            if (it == stop) {
-                throw IllegalStateException("Duplicate value $it")
-            }
-        }
-    }
-
 }
 
 private fun <T> T.single() = arrayListOf(this)

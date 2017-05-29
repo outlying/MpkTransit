@@ -3,7 +3,9 @@ package com.antyzero.mpk.transit.creator.model
 /**
  * Universal container for CSV like data
  */
-open class CsvContainer<T>(values:Collection<T> = emptyList(), private val validator: CsvContainer<T>.(Any?) -> Unit = {}) where T : Map<String, Any?> {
+open class CsvContainer<T>(
+        values: Collection<T> = emptyList(),
+        private val validator: CsvContainer<T>.(Any?) -> Unit = CsvContainer.checkForDuplicates()) where T : Map<String, Any?> {
 
     val keys: MutableSet<String> = mutableSetOf()
     val list: MutableList<T> = mutableListOf()
@@ -13,7 +15,7 @@ open class CsvContainer<T>(values:Collection<T> = emptyList(), private val valid
     }
 
     fun add(element: T): Boolean {
-        validator.invoke(this,element)
+        validator.invoke(this, element)
         element.keys
                 .takeIf { it.containsAll(this.keys) }
                 ?.let {
@@ -39,5 +41,19 @@ open class CsvContainer<T>(values:Collection<T> = emptyList(), private val valid
             stopsCsv.add(values.joinToString(separator = ","))
         }
         return stopsCsv.joinToString(separator = "\n")
+    }
+
+    companion object {
+
+        /**
+         * Validator method, universal
+         */
+        fun <T : Map<String, Any?>> checkForDuplicates(): CsvContainer<T>.(Any?) -> Unit = { stop ->
+            list.forEach {
+                if (it == stop) {
+                    throw IllegalStateException("Duplicate value $it")
+                }
+            }
+        }
     }
 }
