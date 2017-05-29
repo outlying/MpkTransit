@@ -103,7 +103,7 @@ tasks.withType(Test) {
 ext.junitJupiterVersion = '5.0.0-M4'
 
 dependencies {
-    compile project(':database')
+    compile project(':sqlite')
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
     compile "io.reactivex.rxjava2:rxjava:2.0.9"
     compile 'org.xerial:sqlite-jdbc:3.16.1'
